@@ -2,6 +2,7 @@ package com.gmail.petrikov05.SimpleWeb;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.telegram.telegrambots.ApiContextInitializer;
 
 @SpringBootApplication(
         scanBasePackages = "com.gmail.petrikov05"
@@ -9,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SimpleWebApplication {
 
     public static void main(String[] args) {
+        ApiContextInitializer.init();
         SpringApplication.run(SimpleWebApplication.class, args);
     }
 
