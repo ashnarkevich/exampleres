@@ -4,10 +4,12 @@ import java.util.Map;
 
 public interface PriceService {
 
-    Map<Integer, String> getServices();
+    Map<String, String> getServices();
 
-    Map<Integer, String> getServices(String command);
+    Map<String, String> getServices(String command);
 
     String getMessageByCommand(String command);
+
+    String getSubtitle(String command);
 
 }

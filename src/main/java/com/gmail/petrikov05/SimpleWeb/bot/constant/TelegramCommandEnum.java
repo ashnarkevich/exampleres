@@ -5,10 +5,12 @@ import lombok.Getter;
 public enum TelegramCommandEnum {
     START("/START", "Знакомство"),
     HELP("/HELP", "Помощь"),
+    MENU("/MENU", "Меню"),
+    SEND("/SEND", "Написать"),
     FAQ("/FAQ", "Часто задаваемые вопросы"),
-    INFO("/INFO", "Информация"),
     PRICE("/PRICE", "Узнать стоимость услуг"),
-    SERVICES("/SERVICES", "Виды субъектов");
+    SERVICES("/SERVICES", "Виды субъектов"),
+    WANT_BOT("/WANT_BOT", "Хочу себе такой чат-бот");
 
     @Getter
     private String command;

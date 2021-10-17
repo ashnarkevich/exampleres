@@ -14,10 +14,6 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.Keyboard
 
 public class KeyboardUtil {
 
-    public static ReplyKeyboard getTwoButtonsInRowInlineKeyboard(ResponseMessage response) {
-        return getOneButtonInRowInlineKeyboard(response);
-    }
-
     public static ReplyKeyboard getOneButtonInRowInlineKeyboard(ResponseMessage response) {
         InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup();
         if (!response.getButtonMessagesForCallback().isEmpty()) {
@@ -27,7 +23,7 @@ public class KeyboardUtil {
                         List<InlineKeyboardButton> row = new ArrayList<>();
                         InlineKeyboardButton button = new InlineKeyboardButton();
                         button.setText(value);
-                        button.setCallbackData(getPrefixUrl(response.getCommandTitles()) + "/" + key);
+                        button.setCallbackData(getPrefixUrl(response.getCommandTitles()) + key);
                         row.add(button);
                         rows.add(row);
                     }
@@ -60,7 +56,7 @@ public class KeyboardUtil {
             return "";
         } else {
             StringBuilder sb = new StringBuilder();
-            commandTitle.forEach(x -> sb.append(x.getCommand()));
+            commandTitle.forEach(x -> sb.append(x.getCommand()).append("/"));
             return sb.toString();
         }
     }

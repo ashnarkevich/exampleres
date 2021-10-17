@@ -4,7 +4,7 @@ import java.util.Map;
 
 public interface FaqService {
 
-    Map<Integer, String> getFaqs();
+    Map<String, String> getFaqs();
 
     String getMessageByCommand(String callbackCommand);
 

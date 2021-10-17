@@ -6,12 +6,13 @@ public interface MessagePriceConstant {
     String PRICE_TITLE_TWO = "Предприятие";
 
     String PRICE_ONE_SUBTITLE_ONE = "Единый налог.";
-    String PRICE_ONE_SUBTITLE_TWO = "Стартапы. Ответ: Только для тех, кто начинает свой Бизнес! (первый месяц).";
+    String PRICE_ONE_SUBTITLE_TWO = "Стартапы.";
     String PRICE_ONE_SUBTITLE_THREE = "С количеством до 30 первичных документов.";
     String PRICE_ONE_SUBTITLE_FOUR = "Предприятие с количеством от 50 и выше первичных документов.";
 
     String PRICE_ONE_SUBTITLE_ONE_MESSAGE = "От 150 руб.";
-    String PRICE_ONE_SUBTITLE_TWO_MESSAGE = "- Документооборот - до 30 первичных документов в месяц\n" +
+    String PRICE_ONE_SUBTITLE_TWO_MESSAGE = "Только для тех, кто начинает свой Бизнес! (первый месяц).\n" +
+            "- Документооборот - до 30 первичных документов в месяц\n" +
             "- Консультации по бухгалтерским вопросам\n" +
             "Стоимость: УСН от 100 руб. ПН от 100 руб.";
     String PRICE_ONE_SUBTITLE_THREE_MESSAGE = "- Обработка первичных документов\n" +
@@ -27,13 +28,14 @@ public interface MessagePriceConstant {
             "- Курьерская служба\n" +
             "Стоимость: УСН от 300 руб. ОСН от 400 руб.";
 
-    String PRICE_TWO_SUBTITLE_ONE = "Стартапы. Ответ: Только для тех, кто начинает свой Бизнес! (первый месяц).";
+    String PRICE_TWO_SUBTITLE_ONE = "Стартапы.";
     String PRICE_TWO_SUBTITLE_TWO = "Предприятие с количеством до 30 первичных документов.";
     String PRICE_TWO_SUBTITLE_THREE = "Предприятие с количеством до 50 первичных документов.";
     String PRICE_TWO_SUBTITLE_FOUR = "Предприятие с количеством до 100 первичных документов.";
     String PRICE_TWO_SUBTITLE_FIVE = "На предприятии имеется бухгалтер, только функции главного бухгалтера.";
 
-    String PRICE_TWO_SUBTITLE_ONE_MESSAGE = "- Наемных сотрудников - до 5 человек\n" +
+    String PRICE_TWO_SUBTITLE_ONE_MESSAGE = "Только для тех, кто начинает свой Бизнес! (первый месяц).\n" +
+            "- Наемных сотрудников - до 5 человек\n" +
             "- Документооборот - до 30 первичных документов в месяц\n" +
             "- Консультации по бухгалтерским вопросам\n" +
             "- Отчет о финансовых результатах\n" +

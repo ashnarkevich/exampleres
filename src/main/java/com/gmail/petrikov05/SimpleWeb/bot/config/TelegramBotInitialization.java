@@ -66,10 +66,6 @@ public class TelegramBotInitialization extends TelegramLongPollingBot {
                 ReplyKeyboard keyboard = KeyboardUtil.getOneButtonInRowInlineKeyboard(response);
                 return new SendMessage().setText(response.getTextMessage()).setReplyMarkup(keyboard);
             }
-            case KEYBOARD_TWO_BUTTONS_IN_CHAT: {
-                ReplyKeyboard keyboard = KeyboardUtil.getTwoButtonsInRowInlineKeyboard(response);
-                return new SendMessage().setText(response.getTextMessage()).setReplyMarkup(keyboard);
-            }
             default: {
                 log.info("not found keyboard for keyboardTypeEnum");
                 return new SendMessage().setText("App error. Try again.");

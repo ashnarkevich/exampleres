@@ -16,7 +16,7 @@ public class ResponseMessage {
     private String textMessage;
     private KeyboardTypeEnum keyboard;
     private List<TelegramCommandEnum> commandTitles;
-    private Map<Integer, String> buttonMessagesForCallback;
+    private Map<String, String> buttonMessagesForCallback;
 
     public ResponseMessage(String textMessage) {
         this.textMessage = textMessage;
@@ -32,7 +32,7 @@ public class ResponseMessage {
         this.buttonMessagesForCallback = Collections.emptyMap();
     }
 
-    public ResponseMessage(String textMessage, KeyboardTypeEnum keyboard, List<TelegramCommandEnum> commandTitles, Map<Integer, String> buttonMessagesForCallback) {
+    public ResponseMessage(String textMessage, KeyboardTypeEnum keyboard, List<TelegramCommandEnum> commandTitles, Map<String, String> buttonMessagesForCallback) {
         this.textMessage = textMessage;
         this.keyboard = keyboard;
         this.commandTitles = commandTitles;

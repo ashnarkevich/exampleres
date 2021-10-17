@@ -1,7 +1,7 @@
 package com.gmail.petrikov05.SimpleWeb.bot.impl;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import com.gmail.petrikov05.SimpleWeb.bot.FaqService;
 import lombok.extern.log4j.Log4j2;
@@ -21,13 +21,12 @@ import static com.gmail.petrikov05.SimpleWeb.bot.constant.MessageFaqConstant.TIT
 public class FaqServiceImpl implements FaqService {
 
     @Override
-    public Map<Integer, String> getFaqs() {
-        Map<Integer, String> titles = new HashMap<>();
-        titles.put(1, TITLE_FAQ_ONE);
-        titles.put(2, TITLE_FAQ_TWO);
-        titles.put(3, TITLE_FAQ_THREE);
-        titles.put(4, TITLE_FAQ_FOUR);
-        //        titles.put(5, TITLE_FAQ_FIVE); // задать вопрос пока не работает
+    public Map<String, String> getFaqs() {
+        Map<String, String> titles = new TreeMap<>();
+        titles.put("1", TITLE_FAQ_ONE);
+        titles.put("2", TITLE_FAQ_TWO);
+        titles.put("3", TITLE_FAQ_THREE);
+        titles.put("4", TITLE_FAQ_FOUR);
         return titles;
     }
 

@@ -8,8 +8,4 @@ public interface MessageConstant {
 
     String LOG_MESSAGE_NOT_FOUND = "not found response message for command: ";
 
-    String TITLE_FAQ = "Часто задаваемые вопросы:";
-    String TITLE_PRICE = "Стоимость услуг:";
-    String TITLE_PRICE_SUBTITLE = "Разновидности:";
-
 }

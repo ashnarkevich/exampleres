@@ -2,8 +2,10 @@ package com.gmail.petrikov05.SimpleWeb.bot.impl;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import com.gmail.petrikov05.SimpleWeb.bot.FaqService;
+import com.gmail.petrikov05.SimpleWeb.bot.MenuService;
 import com.gmail.petrikov05.SimpleWeb.bot.PriceService;
 import com.gmail.petrikov05.SimpleWeb.bot.TelegramBotService;
 import com.gmail.petrikov05.SimpleWeb.bot.constant.TelegramCommandEnum;
@@ -17,12 +19,11 @@ import static com.gmail.petrikov05.SimpleWeb.bot.constant.MessageConstant.LOG_ME
 import static com.gmail.petrikov05.SimpleWeb.bot.constant.MessageConstant.MESSAGE_FOR_COMMAND_HELP;
 import static com.gmail.petrikov05.SimpleWeb.bot.constant.MessageConstant.MESSAGE_FOR_COMMAND_START;
 import static com.gmail.petrikov05.SimpleWeb.bot.constant.MessageConstant.MESSAGE_FOR_WRONG_COMMAND;
-import static com.gmail.petrikov05.SimpleWeb.bot.constant.MessageConstant.TITLE_FAQ;
-import static com.gmail.petrikov05.SimpleWeb.bot.constant.MessageConstant.TITLE_PRICE;
-import static com.gmail.petrikov05.SimpleWeb.bot.constant.MessageConstant.TITLE_PRICE_SUBTITLE;
 import static com.gmail.petrikov05.SimpleWeb.bot.constant.TelegramCommandEnum.FAQ;
 import static com.gmail.petrikov05.SimpleWeb.bot.constant.TelegramCommandEnum.HELP;
+import static com.gmail.petrikov05.SimpleWeb.bot.constant.TelegramCommandEnum.MENU;
 import static com.gmail.petrikov05.SimpleWeb.bot.constant.TelegramCommandEnum.PRICE;
+import static com.gmail.petrikov05.SimpleWeb.bot.constant.TelegramCommandEnum.SEND;
 import static com.gmail.petrikov05.SimpleWeb.bot.constant.TelegramCommandEnum.SERVICES;
 
 @Component
@@ -31,10 +32,12 @@ public class TelegramTelegramBotServiceImpl implements TelegramBotService {
 
     private final FaqService faqService;
     private final PriceService priceService;
+    private final MenuService menuService;
 
-    public TelegramTelegramBotServiceImpl(FaqService faqService, PriceService priceService) {
+    public TelegramTelegramBotServiceImpl(FaqService faqService, PriceService priceService, MenuService menuService) {
         this.faqService = faqService;
         this.priceService = priceService;
+        this.menuService = menuService;
     }
 
     @Override
@@ -54,33 +57,38 @@ public class TelegramTelegramBotServiceImpl implements TelegramBotService {
         int firstIndex = callback.indexOf("/");
         int secondIndex = callback.indexOf("/", firstIndex + 1);
         TelegramCommandEnum parentCommand = convertTextToCommand(callback.substring(firstIndex, secondIndex));
+        String command = callback.substring(secondIndex + 1);
         switch (parentCommand) {
             case FAQ: {
-                return new ResponseMessage(faqService.getMessageByCommand(callback.substring(secondIndex + 1)));
+                return new ResponseMessage(faqService.getMessageByCommand(command));
             }
             case PRICE: {
-                return new ResponseMessage(TITLE_PRICE_SUBTITLE,
+                return new ResponseMessage(priceService.getSubtitle(command),
                         KEYBOARD_ONE_BUTTON_IN_CHAT,
                         Collections.singletonList(SERVICES),
-                        priceService.getServices(callback.substring(secondIndex + 1)));
+                        priceService.getServices(command));
             }
             case SERVICES: {
-                return new ResponseMessage(priceService.getMessageByCommand(callback.substring(secondIndex + 1)));
+                return new ResponseMessage(priceService.getMessageByCommand(command));
             }
             default: {
-                log.info("not found response message for command: " + callback);
+                log.info("not found response message for callback command: " + callback);
                 return new ResponseMessage(MESSAGE_FOR_WRONG_COMMAND);
             }
         }
     }
 
     private ResponseMessage getAnswerByNoCommand(String text) {
+        if (text.equals(MENU.getDescription().toUpperCase())) {
+            return getAnswerByCommand(MENU.getCommand());
+        }
         if (text.equals(FAQ.getDescription().toUpperCase())) {
             return getAnswerByCommand(FAQ.getCommand());
         }
         if (text.equals(PRICE.getDescription().toUpperCase())) {
             return getAnswerByCommand(PRICE.getCommand());
         }
+        log.info("not found response message by no command: " + text);
         return new ResponseMessage(MESSAGE_FOR_WRONG_COMMAND);
     }
 
@@ -88,16 +96,25 @@ public class TelegramTelegramBotServiceImpl implements TelegramBotService {
         TelegramCommandEnum command = convertTextToCommand(text);
         switch (command) {
             case START: {
-                return new ResponseMessage(MESSAGE_FOR_COMMAND_START, KEYBOARD_ONE_BUTTON, Arrays.asList(FAQ, PRICE));
+                return new ResponseMessage(MESSAGE_FOR_COMMAND_START, KEYBOARD_ONE_BUTTON, getDefaultButtonKeyboard());
             }
             case HELP: {
-                return new ResponseMessage(MESSAGE_FOR_COMMAND_HELP, KEYBOARD_ONE_BUTTON_IN_CHAT, Arrays.asList(FAQ, PRICE));
+                return new ResponseMessage(MESSAGE_FOR_COMMAND_HELP, KEYBOARD_ONE_BUTTON_IN_CHAT, getDefaultButtonKeyboard());
+            }
+            case MENU: {
+                return new ResponseMessage(MENU.getDescription(),
+                        KEYBOARD_ONE_BUTTON_IN_CHAT,
+                        Collections.emptyList(),
+                        menuService.getMenuCommands());
             }
             case FAQ: {
-                return new ResponseMessage(TITLE_FAQ, KEYBOARD_ONE_BUTTON_IN_CHAT, Collections.singletonList(FAQ), faqService.getFaqs());
+                return new ResponseMessage(FAQ.getDescription(),
+                        KEYBOARD_ONE_BUTTON_IN_CHAT,
+                        Collections.singletonList(FAQ),
+                        faqService.getFaqs());
             }
             case PRICE: {
-                return new ResponseMessage(TITLE_PRICE,
+                return new ResponseMessage(PRICE.getDescription(),
                         KEYBOARD_ONE_BUTTON_IN_CHAT,
                         Collections.singletonList(PRICE),
                         priceService.getServices());
@@ -107,6 +124,10 @@ public class TelegramTelegramBotServiceImpl implements TelegramBotService {
                 return new ResponseMessage(MESSAGE_FOR_WRONG_COMMAND);
             }
         }
+    }
+
+    private List<TelegramCommandEnum> getDefaultButtonKeyboard() {
+        return Arrays.asList(MENU, SEND);
     }
 
     private TelegramCommandEnum convertTextToCommand(String text) {
