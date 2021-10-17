@@ -7,8 +7,8 @@ public interface MessagePriceConstant {
 
     String PRICE_ONE_SUBTITLE_ONE = "Единый налог.";
     String PRICE_ONE_SUBTITLE_TWO = "Стартапы.";
-    String PRICE_ONE_SUBTITLE_THREE = "С количеством до 30 первичных документов.";
-    String PRICE_ONE_SUBTITLE_FOUR = "Предприятие с количеством от 50 и выше первичных документов.";
+    String PRICE_ONE_SUBTITLE_THREE = "До 30 первичных учетных документов.";
+    String PRICE_ONE_SUBTITLE_FOUR = "От 50 и выше первичных документов.";
 
     String PRICE_ONE_SUBTITLE_ONE_MESSAGE = "От 150 руб.";
     String PRICE_ONE_SUBTITLE_TWO_MESSAGE = "Только для тех, кто начинает свой Бизнес! (первый месяц).\n" +
@@ -29,10 +29,10 @@ public interface MessagePriceConstant {
             "Стоимость: УСН от 300 руб. ОСН от 400 руб.";
 
     String PRICE_TWO_SUBTITLE_ONE = "Стартапы.";
-    String PRICE_TWO_SUBTITLE_TWO = "Предприятие с количеством до 30 первичных документов.";
-    String PRICE_TWO_SUBTITLE_THREE = "Предприятие с количеством до 50 первичных документов.";
-    String PRICE_TWO_SUBTITLE_FOUR = "Предприятие с количеством до 100 первичных документов.";
-    String PRICE_TWO_SUBTITLE_FIVE = "На предприятии имеется бухгалтер, только функции главного бухгалтера.";
+    String PRICE_TWO_SUBTITLE_TWO = " До 30 первичных учетных документов.";
+    String PRICE_TWO_SUBTITLE_THREE = "До 50 первичных учетных документов.";
+    String PRICE_TWO_SUBTITLE_FOUR = "До 100 первичных учетных документов.";
+    String PRICE_TWO_SUBTITLE_FIVE = "Только функции главного бухгалтера.";
 
     String PRICE_TWO_SUBTITLE_ONE_MESSAGE = "Только для тех, кто начинает свой Бизнес! (первый месяц).\n" +
             "- Наемных сотрудников - до 5 человек\n" +

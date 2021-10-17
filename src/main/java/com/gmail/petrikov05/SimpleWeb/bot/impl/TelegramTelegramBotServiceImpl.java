@@ -1,6 +1,5 @@
 package com.gmail.petrikov05.SimpleWeb.bot.impl;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -15,15 +14,14 @@ import org.springframework.stereotype.Component;
 
 import static com.gmail.petrikov05.SimpleWeb.bot.constant.KeyboardTypeEnum.KEYBOARD_ONE_BUTTON;
 import static com.gmail.petrikov05.SimpleWeb.bot.constant.KeyboardTypeEnum.KEYBOARD_ONE_BUTTON_IN_CHAT;
-import static com.gmail.petrikov05.SimpleWeb.bot.constant.MessageConstant.LOG_MESSAGE_NOT_FOUND;
 import static com.gmail.petrikov05.SimpleWeb.bot.constant.MessageConstant.MESSAGE_FOR_COMMAND_HELP;
 import static com.gmail.petrikov05.SimpleWeb.bot.constant.MessageConstant.MESSAGE_FOR_COMMAND_START;
 import static com.gmail.petrikov05.SimpleWeb.bot.constant.MessageConstant.MESSAGE_FOR_WRONG_COMMAND;
+import static com.gmail.petrikov05.SimpleWeb.bot.constant.MessageConstant.MESSAGE_WANT_BOT;
 import static com.gmail.petrikov05.SimpleWeb.bot.constant.TelegramCommandEnum.FAQ;
 import static com.gmail.petrikov05.SimpleWeb.bot.constant.TelegramCommandEnum.HELP;
 import static com.gmail.petrikov05.SimpleWeb.bot.constant.TelegramCommandEnum.MENU;
 import static com.gmail.petrikov05.SimpleWeb.bot.constant.TelegramCommandEnum.PRICE;
-import static com.gmail.petrikov05.SimpleWeb.bot.constant.TelegramCommandEnum.SEND;
 import static com.gmail.petrikov05.SimpleWeb.bot.constant.TelegramCommandEnum.SERVICES;
 
 @Component
@@ -119,15 +117,19 @@ public class TelegramTelegramBotServiceImpl implements TelegramBotService {
                         Collections.singletonList(PRICE),
                         priceService.getServices());
             }
+            case WANT_BOT: {
+                return new ResponseMessage(MESSAGE_WANT_BOT);
+            }
             default: {
-                log.info(LOG_MESSAGE_NOT_FOUND + command);
+                log.info("not found response message for command: " + command);
                 return new ResponseMessage(MESSAGE_FOR_WRONG_COMMAND);
             }
         }
     }
 
     private List<TelegramCommandEnum> getDefaultButtonKeyboard() {
-        return Arrays.asList(MENU, SEND);
+        //        return Arrays.asList(MENU, SEND);
+        return Collections.singletonList(MENU);
     }
 
     private TelegramCommandEnum convertTextToCommand(String text) {
